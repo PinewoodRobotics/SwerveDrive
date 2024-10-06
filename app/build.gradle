@@ -13,15 +13,21 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    maven { url 'https://frcmaven.wpi.edu/artifactory/release/' }
 }
 
 dependencies {
+    // Deps for WPILib:
+    implementation 'edu.wpi.first.wpilibj:wpilibj-java:2024.3.2'
+    implementation 'edu.wpi.first.ntcore:ntcore-java:2024.3.2'
+
     // Use JUnit Jupiter for testing.
     testImplementation libs.junit.jupiter
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    // This dependency is used by the application.
     implementation libs.guava
 }
 
@@ -30,11 +36,6 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
-}
-
-application {
-    // Define the main class for the application.
-    mainClass = 'swervedrive.App'
 }
 
 tasks.named('test') {
