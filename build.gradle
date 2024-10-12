@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.pwrup'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://frcmaven.wpi.edu/artifactory/release/' }
+}
+
+dependencies {
+    implementation 'edu.wpi.first.wpilibj:wpilibj-java:2024.3.2'
+    implementation 'edu.wpi.first.ntcore:ntcore-java:2024.3.2'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
