@@ -12,15 +12,15 @@ public interface IMotor {
     IRelativeEncoder getEncoder();
 
     /**
-     * @return error does not have to be present so return Option
+     * @throws ResetDefaultError if error
      */
-    Optional<ResetDefaultError> restoreFactoryDefaults();
+    void restoreFactoryDefaults() throws ResetDefaultError;
 
     /**
      * @param limit in Amperes
-     * @return error does not have to be present so return Option
+     * @throws SetMaxCurrentError if error
      */
-    Optional<SetMaxCurrentError> setSmartCurrentLimit(int limit);
+    void setSmartCurrentLimit(int limit) throws SetMaxCurrentError;
 
     /**
      * @param isInverted The state of inversion, true is inverted.
