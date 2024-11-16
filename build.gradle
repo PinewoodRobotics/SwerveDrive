@@ -13,6 +13,8 @@ repositories {
 dependencies {
     implementation 'edu.wpi.first.wpilibj:wpilibj-java:2024.3.2'
     implementation 'edu.wpi.first.ntcore:ntcore-java:2024.3.2'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
