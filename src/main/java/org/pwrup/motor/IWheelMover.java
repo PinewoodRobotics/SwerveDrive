@@ -1,14 +1,13 @@
 package org.pwrup.motor;
 
+import org.pwrup.util.Vec2;
+
 public interface IWheelMover {
     /**
-     * @param speed                The speed of the wheel. In math terms, the modulo
-     *                             of the wheel.
-     * @param angle                The angle of the wheel. In radians where 2pi =
-     *                             360deg
+     * @param vector               The vector to drive the wheel towards.
      * @param finalSpeedMultiplier The multiplier to the speed of the wheel. This
      *                             is used to scale the speed of the wheel to
      *                             the max speed of the robot.
      */
-    void drive(double speed, double angle, double finalSpeedMultiplier);
+    void drive(Vec2 vector, double finalSpeedMultiplier);
 }
