@@ -1,6 +1,6 @@
 package org.pwrup.util;
 
-import org.pwrup.motor.IWheelMover;
+import org.pwrup.motor.WheelMover;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

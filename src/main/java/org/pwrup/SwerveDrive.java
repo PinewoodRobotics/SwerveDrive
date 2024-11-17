@@ -1,5 +1,8 @@
 package org.pwrup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.pwrup.util.Config;
 import org.pwrup.util.Vec2;
 import org.pwrup.util.Wheel;
@@ -17,6 +20,8 @@ public class SwerveDrive {
     }
 
     public void testDrive(Vec2 velocity, double rotationCoefficient, double finalSpeedMultiplier) {
+        List<Vec2> wheelTurnVectors = new ArrayList<>();
+        double maxModulo = 1.0;
         for (Wheel wheel : config.getWheels()) {
             // Get orthogonal vector and then scale it's x, y such that the modulo is
             // rotationCoefficient
@@ -24,7 +29,17 @@ public class SwerveDrive {
 
             // Add the scaled vector to the direction vector to get the wheel turn vector
             Vec2 wheelTurnVector = velocity.add(scaled);
-            wheel.getMover().drive(wheelTurnVector, finalSpeedMultiplier);
+            wheelTurnVectors.add(wheelTurnVector);
+
+            maxModulo = Math.max(maxModulo, wheelTurnVector.getModulo());
         }
+
+        for (int i = 0; i < wheelTurnVectors.size(); i++) {
+            Vec2 wrapped = wheelTurnVectors.get(i).wrapInto1(maxModulo);
+            wheelTurnVectors.set(i, wrapped);
+            config.getWheels()[i].getMover().drive(wrapped, finalSpeedMultiplier);
+        }
+
+        config.getComs().publish("robot_wheel_positions", wheelTurnVectors.toArray(), Vec2[].class);
     }
 }

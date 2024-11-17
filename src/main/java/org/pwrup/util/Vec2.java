@@ -27,11 +27,24 @@ public class Vec2 {
         return Math.atan2(y, x);
     }
 
+    // this function should scale the vector's module and x,y. like for example if
+    // the vector is (10, 0) and newModulo is 1, it should return (1, 0)
     public Vec2 scaleToModulo(double newModulo) {
         double scale = newModulo / getModulo();
         double newX = x * scale;
         double newY = y * scale;
         return new Vec2(newX, newY);
+    }
+
+    // this function should scale the vector's module and x,y. like for example if
+    // the vector is (10, 0) and maxModulo is 30, it should return (10/30, 0)
+    public Vec2 wrapInto1(double maxModulo) {
+        return new Vec2(x / maxModulo, y / maxModulo);
+    }
+
+    public void wrapInto1Self(double maxModulo) {
+        x /= maxModulo;
+        y /= maxModulo;
     }
 
     public Vec2 add(Vec2 other) {
