@@ -29,7 +29,7 @@ public class SwerveTest {
         Config config = new Config(publisher, wheels);
         SwerveDrive drive = new SwerveDrive(config);
 
-        drive.testDrive(new Vec2(0, 0), 0, 1.0);
+        drive.drive(new Vec2(0, 0), 0, 1.0);
 
         verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
         verify(publisher).publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
@@ -50,7 +50,7 @@ public class SwerveTest {
         Config config = new Config(publisher, wheels);
         SwerveDrive drive = new SwerveDrive(config);
 
-        drive.testDrive(new Vec2(1, 0), 0, 1.0);
+        drive.drive(new Vec2(1, 0), 0, 1.0);
 
         verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
         verify(publisher).publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
@@ -71,7 +71,7 @@ public class SwerveTest {
         Config config = new Config(publisher, wheels);
         SwerveDrive drive = new SwerveDrive(config);
 
-        drive.testDrive(new Vec2(0, 0), 1.0, 1.0);
+        drive.drive(new Vec2(0, 0), 1.0, 1.0);
 
         verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
         verify(publisher).publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
@@ -92,7 +92,7 @@ public class SwerveTest {
         Config config = new Config(publisher, wheels);
         SwerveDrive drive = new SwerveDrive(config);
 
-        drive.testDrive(new Vec2(1, 1), 0.5, 1.0);
+        drive.drive(new Vec2(1, 1), 0.5, 1.0);
 
         verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
         verify(publisher).publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
@@ -113,7 +113,7 @@ public class SwerveTest {
         Config config = new Config(publisher, wheels);
         SwerveDrive drive = new SwerveDrive(config);
 
-        drive.testDrive(new Vec2(1, 1), 0.5, 0.5);
+        drive.drive(new Vec2(1, 1), 0.5, 0.5);
 
         verify(mover, times(4)).drive(any(Vec2.class), eq(0.5));
         verify(publisher).publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));

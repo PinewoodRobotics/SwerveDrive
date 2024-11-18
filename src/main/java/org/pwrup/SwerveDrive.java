@@ -19,7 +19,11 @@ public class SwerveDrive {
         this.config = config;
     }
 
-    public void testDrive(Vec2 velocity, double rotationCoefficient, double finalSpeedMultiplier) {
+    public void drive(Vec2 velocity, double gyroAngle, double rotationCoefficient, double finalSpeedMultiplier) {
+        drive(velocity.rotate(-gyroAngle), rotationCoefficient, finalSpeedMultiplier);
+    }
+
+    public void drive(Vec2 velocity, double rotationCoefficient, double finalSpeedMultiplier) {
         List<Vec2> wheelTurnVectors = new ArrayList<>();
         double maxModulo = 1.0;
         for (Wheel wheel : config.getWheels()) {
@@ -41,5 +45,9 @@ public class SwerveDrive {
         }
 
         config.getComs().publish("robot_wheel_positions", wheelTurnVectors.toArray(), Vec2[].class);
+    }
+
+    public void driveTowards(Vec2 target, double speed, double rotationCoefficient) {
+        drive(target.scaleToModulo(speed), rotationCoefficient, 1.0);
     }
 }

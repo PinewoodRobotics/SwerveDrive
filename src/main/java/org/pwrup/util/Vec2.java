@@ -19,6 +19,14 @@ public class Vec2 {
         return new Vec2(modulo * Math.cos(angle), modulo * Math.sin(angle));
     }
 
+    public Vec2 rotate(double angle) {
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        return new Vec2(
+                x * cos - y * sin,
+                x * sin + y * cos);
+    }
+
     public double getModulo() {
         return Math.sqrt(x * x + y * y);
     }
