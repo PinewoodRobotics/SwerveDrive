@@ -15,7 +15,7 @@ public abstract class WheelMover {
         double angleDiff = normalizeToMinusPiToPi(normalizedAngle - currentAngle);
 
         // If the angle difference is more than 90 degrees, consider reversing direction
-        if (Math.abs(angleDiff) > Math.PI / 2) {
+        if (Math.abs(angleDiff) > Math.PI / 2 && Math.abs(angleDiff) < ((Math.PI * 3) / 2)) {
             double reversedAngle = normalizeToMinusPiToPi(normalizedAngle + Math.PI);
             double reversedDiff = normalizeToMinusPiToPi(reversedAngle - currentAngle);
 
@@ -30,7 +30,17 @@ public abstract class WheelMover {
     }
 
     private double normalizeToMinusPiToPi(double angle) {
-        return ((angle + Math.PI) % (2 * Math.PI)) - Math.PI;
+        // Normalize the angle to the range [0, 2π)
+        angle = angle % (2 * Math.PI);
+
+        // Adjust to the range [-π, π)
+        if (angle >= Math.PI) {
+            angle -= 2 * Math.PI;
+        } else if (angle < -Math.PI) {
+            angle += 2 * Math.PI;
+        }
+
+        return angle;
     }
 
     /**
@@ -41,7 +51,7 @@ public abstract class WheelMover {
      */
     public void drive(Vec2 vector, double finalSpeedMultiplier) {
         double[] optimized = optimizeVector(vector);
-        drive(optimized[0], Math.max(optimized[1] * finalSpeedMultiplier, 1.0));
+        drive(optimized[0], Math.min(optimized[1] * finalSpeedMultiplier, 1.0));
     }
 
     public abstract void drive(double angle, double speed);
