@@ -1,5 +1,11 @@
 plugins {
     id 'java'
+    id 'edu.wpi.first.GradleRIO' version '2025.2.1'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 group = 'org.pwrup'
@@ -7,17 +13,25 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven { url 'https://frcmaven.wpi.edu/artifactory/release/' }
+    maven { url = 'https://frcmaven.wpi.edu/artifactory/release/' }
 }
 
 dependencies {
-    implementation 'edu.wpi.first.wpilibj:wpilibj-java:2024.3.2'
-    implementation 'edu.wpi.first.ntcore:ntcore-java:2024.3.2'
+    implementation wpi.java.deps.wpilib()  // WPILib core libraries
+    implementation wpi.java.vendor.java() // Vendor libraries
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:5.10.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.10.0'
 }
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
 }
