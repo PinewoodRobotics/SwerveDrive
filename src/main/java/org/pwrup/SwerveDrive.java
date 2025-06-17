@@ -2,6 +2,7 @@ package org.pwrup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.pwrup.util.Config;
 import org.pwrup.util.Vec2;
 import org.pwrup.util.Wheel;
@@ -59,13 +60,16 @@ public class SwerveDrive {
       config.getWheels()[i].getMover().drive(wrapped, finalSpeedMultiplier);
     }
 
-    config
-      .getComs()
-      .publish(
-        "robot_wheel_positions",
-        wheelTurnVectors.toArray(),
-        Vec2[].class
-      );
+    if (config.getComs().isPresent()) {
+      config
+        .getComs()
+        .get()
+        .publish(
+          "robot_wheel_positions",
+          wheelTurnVectors.toArray(),
+          Vec2[].class
+        );
+    }
   }
 
   public void driveTowards(

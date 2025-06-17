@@ -4,6 +4,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.pwrup.motor.WheelMover;
@@ -26,7 +27,7 @@ public class SwerveTest {
       new Wheel(new Vec2(1, -1), mover),
     };
 
-    Config config = new Config(publisher, wheels);
+    Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
     drive.drive(new Vec2(0, 0), 0, 1.0);
@@ -48,7 +49,7 @@ public class SwerveTest {
       new Wheel(new Vec2(1, -1), mover),
     };
 
-    Config config = new Config(publisher, wheels);
+    Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
     drive.drive(new Vec2(1, 0), 0, 1.0);
@@ -70,7 +71,7 @@ public class SwerveTest {
       new Wheel(new Vec2(1, -1), mover),
     };
 
-    Config config = new Config(publisher, wheels);
+    Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
     drive.drive(new Vec2(0, 0), 1.0, 1.0);
@@ -92,7 +93,7 @@ public class SwerveTest {
       new Wheel(new Vec2(1, -1), mover),
     };
 
-    Config config = new Config(publisher, wheels);
+    Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
     drive.drive(new Vec2(1, 1), 0.5, 1.0);
@@ -114,7 +115,7 @@ public class SwerveTest {
       new Wheel(new Vec2(1, -1), mover),
     };
 
-    Config config = new Config(publisher, wheels);
+    Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
     drive.drive(new Vec2(1, 1), 0.5, 0.5);
