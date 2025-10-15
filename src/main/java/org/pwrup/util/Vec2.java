@@ -39,7 +39,11 @@ public class Vec2 {
    * the vector is (10, 0) and newModulo is 1, it should return (1, 0)
    */
   public Vec2 scaleToModulo(double newModulo) {
-    double scale = newModulo / getModulo();
+    double current = getModulo();
+    if (current == 0) {
+      return new Vec2(0, 0);
+    }
+    double scale = newModulo / current;
     double newX = x * scale;
     double newY = y * scale;
     return new Vec2(newX, newY);
@@ -64,8 +68,15 @@ public class Vec2 {
     return new Vec2(x - other.x, y - other.y);
   }
 
+  public Vec2 scale(double factor) {
+    return new Vec2(x * factor, y * factor);
+  }
+
   public Vec2 normalize() {
     double modulo = getModulo();
+    if (modulo == 0) {
+      return new Vec2(0, 0);
+    }
     return new Vec2(x / modulo, y / modulo);
   }
 
