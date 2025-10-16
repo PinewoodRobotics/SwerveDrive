@@ -21,20 +21,20 @@ public class SwerveTest {
     IPublisher publisher = mock(IPublisher.class);
 
     Wheel[] wheels = new Wheel[] {
-      new Wheel(new Vec2(1, 1), mover),
-      new Wheel(new Vec2(-1, 1), mover),
-      new Wheel(new Vec2(-1, -1), mover),
-      new Wheel(new Vec2(1, -1), mover),
+        new Wheel(new Vec2(1, 1), mover),
+        new Wheel(new Vec2(-1, 1), mover),
+        new Wheel(new Vec2(-1, -1), mover),
+        new Wheel(new Vec2(1, -1), mover),
     };
 
     Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
-    drive.drive(new Vec2(0, 0), 0, 1.0);
+    drive.driveNonRelative(new Vec2(0, 0), 0, 1.0);
 
     verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
     verify(publisher)
-      .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
+        .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
   }
 
   @Test
@@ -43,20 +43,20 @@ public class SwerveTest {
     IPublisher publisher = mock(IPublisher.class);
 
     Wheel[] wheels = new Wheel[] {
-      new Wheel(new Vec2(1, 1), mover),
-      new Wheel(new Vec2(-1, 1), mover),
-      new Wheel(new Vec2(-1, -1), mover),
-      new Wheel(new Vec2(1, -1), mover),
+        new Wheel(new Vec2(1, 1), mover),
+        new Wheel(new Vec2(-1, 1), mover),
+        new Wheel(new Vec2(-1, -1), mover),
+        new Wheel(new Vec2(1, -1), mover),
     };
 
     Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
-    drive.drive(new Vec2(1, 0), 0, 1.0);
+    drive.driveNonRelative(new Vec2(1, 0), 0, 1.0);
 
     verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
     verify(publisher)
-      .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
+        .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
   }
 
   @Test
@@ -65,20 +65,20 @@ public class SwerveTest {
     IPublisher publisher = mock(IPublisher.class);
 
     Wheel[] wheels = new Wheel[] {
-      new Wheel(new Vec2(1, 1), mover),
-      new Wheel(new Vec2(-1, 1), mover),
-      new Wheel(new Vec2(-1, -1), mover),
-      new Wheel(new Vec2(1, -1), mover),
+        new Wheel(new Vec2(1, 1), mover),
+        new Wheel(new Vec2(-1, 1), mover),
+        new Wheel(new Vec2(-1, -1), mover),
+        new Wheel(new Vec2(1, -1), mover),
     };
 
     Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
-    drive.drive(new Vec2(0, 0), 1.0, 1.0);
+    drive.driveNonRelative(new Vec2(0, 0), 1.0, 1.0);
 
     verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
     verify(publisher)
-      .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
+        .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
   }
 
   @Test
@@ -87,20 +87,20 @@ public class SwerveTest {
     IPublisher publisher = mock(IPublisher.class);
 
     Wheel[] wheels = new Wheel[] {
-      new Wheel(new Vec2(1, 1), mover),
-      new Wheel(new Vec2(-1, 1), mover),
-      new Wheel(new Vec2(-1, -1), mover),
-      new Wheel(new Vec2(1, -1), mover),
+        new Wheel(new Vec2(1, 1), mover),
+        new Wheel(new Vec2(-1, 1), mover),
+        new Wheel(new Vec2(-1, -1), mover),
+        new Wheel(new Vec2(1, -1), mover),
     };
 
     Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
-    drive.drive(new Vec2(1, 1), 0.5, 1.0);
+    drive.driveNonRelative(new Vec2(1, 1), 0.5, 1.0);
 
     verify(mover, times(4)).drive(any(Vec2.class), eq(1.0));
     verify(publisher)
-      .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
+        .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
   }
 
   @Test
@@ -109,19 +109,19 @@ public class SwerveTest {
     IPublisher publisher = mock(IPublisher.class);
 
     Wheel[] wheels = new Wheel[] {
-      new Wheel(new Vec2(1, 1), mover),
-      new Wheel(new Vec2(-1, 1), mover),
-      new Wheel(new Vec2(-1, -1), mover),
-      new Wheel(new Vec2(1, -1), mover),
+        new Wheel(new Vec2(1, 1), mover),
+        new Wheel(new Vec2(-1, 1), mover),
+        new Wheel(new Vec2(-1, -1), mover),
+        new Wheel(new Vec2(1, -1), mover),
     };
 
     Config config = new Config(Optional.of(publisher), wheels);
     SwerveDrive drive = new SwerveDrive(config);
 
-    drive.drive(new Vec2(1, 1), 0.5, 0.5);
+    drive.driveNonRelative(new Vec2(1, 1), 0.5, 0.5);
 
     verify(mover, times(4)).drive(any(Vec2.class), eq(0.5));
     verify(publisher)
-      .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
+        .publish(eq("robot_wheel_positions"), any(), eq(Vec2[].class));
   }
 }
