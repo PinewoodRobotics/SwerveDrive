@@ -40,12 +40,12 @@ WheelMover frontLeft = new YourWheelMover();
 WheelMover frontRight = new YourWheelMover();
 WheelMover backLeft = new YourWheelMover();
 WheelMover backRight = new YourWheelMover();
-// Define wheel positions relative to robot center
+// Define wheel positions relative to robot center using +x forward, +y left
 Wheel[] wheels = new Wheel[] {
-    new Wheel(new Vec2(1, 1), frontLeft, 1), // Front Left
-    new Wheel(new Vec2(-1, 1), frontRight, 1), // Front Right
-    new Wheel(new Vec2(-1, -1), backLeft, 1), // Back Left
-    new Wheel(new Vec2(1, -1), backRight, 1) // Back Right
+    new Wheel(new Vec2(1, 1), frontLeft), // Front Left
+    new Wheel(new Vec2(1, -1), frontRight), // Front Right
+    new Wheel(new Vec2(-1, 1), backLeft), // Back Left
+    new Wheel(new Vec2(-1, -1), backRight) // Back Right
 };
 ```
 
@@ -76,6 +76,9 @@ Vec2 target = new Vec2(5.0, 3.0);
 double speed = 0.8;
 drive.driveTowards(target, speed, rotationCoefficient);
 ```
+
+The library uses the standard robot coordinate frame: `+x` forward, `+y` left,
+and positive rotation counterclockwise.
 
 ## Key Components
 
