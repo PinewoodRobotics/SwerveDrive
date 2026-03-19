@@ -28,7 +28,7 @@ public class OptimizerTest {
         WheelMover mover = new WheelMover(0);
         Vec2 vector = new Vec2(-1, 0); // π radians
         double[] result = mover.optimizeVector(vector);
-        assertEquals(0.0, result[0]);
+        assertEquals(0.0, result[0], DELTA);
         assertEquals(-1, result[1]);
     }
 

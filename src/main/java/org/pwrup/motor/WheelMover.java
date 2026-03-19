@@ -1,46 +1,26 @@
 package org.pwrup.motor;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import org.pwrup.util.Vec2;
 
 public abstract class WheelMover {
+  private static final double kZeroVectorEpsilon = 1e-9;
+
   public double[] optimizeVector(Vec2 vector) {
-    double angle = vector.getAngle();
     double speed = vector.getModulo();
+    Rotation2d currentAngle = Rotation2d.fromRadians(getCurrentAngle());
 
-    // Normalize angles to [-π, π)
-    double normalizedAngle = normalizeToMinusPiToPi(angle);
-    double currentAngle = normalizeToMinusPiToPi(getCurrentAngle());
-
-    // Calculate the angle difference
-    double angleDiff = normalizeToMinusPiToPi(normalizedAngle - currentAngle);
-
-    // If the angle difference is more than 90 degrees, consider reversing direction
-    if (Math.abs(angleDiff) > Math.PI / 2 && Math.abs(angleDiff) < ((Math.PI * 3) / 2)) {
-      double reversedAngle = normalizeToMinusPiToPi(normalizedAngle + Math.PI);
-      double reversedDiff = normalizeToMinusPiToPi(reversedAngle - currentAngle);
-
-      // Reverse if it minimizes the angular difference
-      if (Math.abs(reversedDiff) < Math.abs(angleDiff)) {
-        normalizedAngle = reversedAngle;
-        speed = -speed;
-      }
+    // With no requested wheel motion, keep the current azimuth instead of
+    // snapping to a canonical branch.
+    if (speed < kZeroVectorEpsilon) {
+      return new double[] { currentAngle.getRadians(), 0.0 };
     }
 
-    return new double[] { normalizedAngle, speed };
-  }
-
-  private double normalizeToMinusPiToPi(double angle) {
-    // Normalize the angle to the range [0, 2π)
-    angle = angle % (2 * Math.PI);
-
-    // Adjust to the range [-π, π)
-    if (angle >= Math.PI) {
-      angle -= 2 * Math.PI;
-    } else if (angle < -Math.PI) {
-      angle += 2 * Math.PI;
-    }
-
-    return angle;
+    SwerveModuleState optimized = SwerveModuleState.optimize(
+        new SwerveModuleState(speed, Rotation2d.fromRadians(vector.getAngle())),
+        currentAngle);
+    return new double[] { optimized.angle.getRadians(), optimized.speedMetersPerSecond };
   }
 
   /**
