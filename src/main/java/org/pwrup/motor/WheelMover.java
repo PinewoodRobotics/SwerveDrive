@@ -1,7 +1,7 @@
 package org.pwrup.motor;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
+import org.wpilib.math.geometry.Rotation2d;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import org.pwrup.util.Vec2;
 
 public abstract class WheelMover {
@@ -17,10 +17,9 @@ public abstract class WheelMover {
       return new double[] { currentAngle.getRadians(), 0.0 };
     }
 
-    SwerveModuleState optimized = SwerveModuleState.optimize(
-        new SwerveModuleState(speed, Rotation2d.fromRadians(vector.getAngle())),
-        currentAngle);
-    return new double[] { optimized.angle.getRadians(), optimized.speedMetersPerSecond };
+    SwerveModuleVelocity optimized =
+        new SwerveModuleVelocity(speed, Rotation2d.fromRadians(vector.getAngle())).optimize(currentAngle);
+    return new double[] { optimized.angle.getRadians(), optimized.velocity };
   }
 
   /**

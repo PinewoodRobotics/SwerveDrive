@@ -1,11 +1,11 @@
 plugins {
     id 'java'
-    id 'edu.wpi.first.GradleRIO' version '2025.2.1'
+    id 'org.wpilib.GradleRIO' version '2027.0.0-alpha-8'
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 group = 'org.pwrup'
@@ -13,19 +13,19 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven { url = 'https://frcmaven.wpi.edu/artifactory/release/' }
 }
 
 dependencies {
     implementation wpi.java.deps.wpilib()  // WPILib core libraries
     implementation wpi.java.vendor.java() // Vendor libraries
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    compileOnly 'org.projectlombok:lombok:1.18.48'
+    annotationProcessor 'org.projectlombok:lombok:1.18.48'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.mockito:mockito-core:5.10.0'
-    testImplementation 'org.mockito:mockito-junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.mockito:mockito-core:5.24.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.24.0'
 }
 
 test {

@@ -7,8 +7,8 @@ import org.pwrup.util.Config;
 import org.pwrup.util.Vec2;
 import org.pwrup.util.Wheel;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.geometry.Rotation2d;
+import org.wpilib.math.kinematics.ChassisVelocities;
 
 /**
  * This class implements the logic for controlling a swerve drive robot.
@@ -23,8 +23,8 @@ public class SwerveDrive {
     this.config = config;
   }
 
-  public void driveNonRelative(ChassisSpeeds speeds) {
-    driveNonRelative(new Vec2(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), speeds.omegaRadiansPerSecond);
+  public void driveNonRelative(ChassisVelocities speeds) {
+    driveNonRelative(new Vec2(speeds.vx, speeds.vy), speeds.omega);
   }
 
   public void driveNonRelative(
@@ -40,9 +40,9 @@ public class SwerveDrive {
     drive0(linearVelocityMpsRobot, omegaRadPerSec, finalSpeedMultiplier);
   }
 
-  public void driveWithGyro(ChassisSpeeds speeds, Rotation2d gyroAngle) {
-    driveWithGyro(new Vec2(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond), gyroAngle.getRadians(),
-        speeds.omegaRadiansPerSecond);
+  public void driveWithGyro(ChassisVelocities speeds, Rotation2d gyroAngle) {
+    driveWithGyro(new Vec2(speeds.vx, speeds.vy), gyroAngle.getRadians(),
+        speeds.omega);
   }
 
   public void driveWithGyro(

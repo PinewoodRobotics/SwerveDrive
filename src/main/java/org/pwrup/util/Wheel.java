@@ -1,6 +1,6 @@
 package org.pwrup.util;
 
-import edu.wpi.first.math.geometry.Translation2d;
+import org.wpilib.math.geometry.Translation2d;
 import lombok.Getter;
 import org.pwrup.motor.WheelMover;
 
